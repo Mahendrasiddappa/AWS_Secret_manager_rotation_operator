@@ -22,7 +22,7 @@ Running the above command will create a CloudFormation stack provisining followi
 
 4. Clone the project into go project path -   
 ```
-cd ~/go/src && git clone https://github.com/Mahendrasiddappa/AWS_Secret_manager_rotation_operator.git && cd AWS_Secret_manager_rotation_operator
+cd ~/go/src && git clone https://github.com/Mahendrasiddappa/secretoperator.git && cd secretoperator
 ```
 
 5. Following commands will get region, SQS URL and IRSA IAM role arn from the CloudFormation stack created in step 3. If you want to use existing resources in your account you can pass those vaules to the below variables - 
@@ -54,7 +54,7 @@ make deploy IMG=<registry>:<tag>
 ## Testing 
 1. Create CRD in default namespace which will look for Deployments, Daemonsets and Statefulset's with labesl "environment: OperatorTest" -
   ```
-  kubectl create -f config/samples/seceretreload_v1_sqssecrets.yaml
+  kubectl create -f config/samples/awssecretsoperator_v1_secretsrotationmapping.yaml
   ```
 
 2. Create a deployment which runs nginx pods and has labels "environment: OperatorTest" - 
