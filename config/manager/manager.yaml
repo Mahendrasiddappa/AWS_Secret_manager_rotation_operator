@@ -41,7 +41,7 @@ spec:
         - name: SECRETS_SQS_QUEUE_URL
           value: SQS_URL
         - name: AWS_DEFAULT_REGION
-          value: OPERATOR_REGION}
+          value: OPERATOR_REGION
         resources:
           limits:
             cpu: 100m
