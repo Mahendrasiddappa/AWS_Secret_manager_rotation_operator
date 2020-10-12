@@ -64,7 +64,7 @@ make deploy IMG=<registry>:<tag>
 
 3. Create PutSecretValue event -
 ```
-aws secretsmanager put-secret-value --secret-id sqssecret --secret-string [{testsqssec:newsecret}]
+aws secretsmanager put-secret-value --secret-id eks-controller-test-secret --secret-string [{testsqssec:newsecret}]
 ```
 
 ## Result - 
