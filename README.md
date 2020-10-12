@@ -8,7 +8,12 @@ This project helps users to automatically redeploy the pods running on Amazon EK
 
 2. Install kubebuilder - https://book.kubebuilder.io/quick-start.html#installation
 
-3. To test the operator we need a SQS queue and AWS EventBridge rule, which will store the event details of the PutSecretValue API call, so that the Secrets controller can get the secret rotation details. You can either use existing resources or create resources by run the below command -
+3. Clone the project into go project path -   
+```
+git clone https://github.com/Mahendrasiddappa/secretoperator.git && cd secretoperator
+```
+
+4. To test the operator we need a SQS queue and AWS EventBridge rule, which will store the event details of the PutSecretValue API call, so that the Secrets controller can get the secret rotation details. You can either use existing resources or create resources by run the below command -
 ```
 make aws
 ```
@@ -18,11 +23,6 @@ Running the above command will create a CloudFormation stack provisining followi
 * EventBridge rule
 * IAM role for operator IRSA
 * SQS queue
-```
-
-4. Clone the project into go project path -   
-```
-cd ~/go/src && git clone https://github.com/Mahendrasiddappa/secretoperator.git && cd secretoperator
 ```
 
 5. Following commands will get region, SQS URL and IRSA IAM role arn from the CloudFormation stack created in step 3. If you want to use existing resources in your account you can pass those vaules to the below variables - 
@@ -70,3 +70,16 @@ aws secretsmanager put-secret-value --secret-id eks-controller-test-secret --sec
 ## Result - 
 The secrets-nginx deployment should restart the pods
 
+Troubleshooting -
+1. How to check if the secretoperator is running
+Check if there is deployment called "secretoperator-controller-manager" namespace "secretoperator-system". And make sure the pod in the deployment is ready.
+
+2. How to check the logs 
+kubectl logs -c manager -l control-plane=controller-manager -n secretoperator-system
+
+3. How to fix the issue if secretoperator pod logs are showing Access Denied errors ?
+i. Make sure the OperatorRole created by CloudFormation stack in step 4 has the correct trust policy according to IRSA guidlines [A]
+ii. Make sure the OIDC ID in the trust policy is for the EKS cluster on which the operator is running
+iii. Make sure the OIDC identity provider is created as per the IRSA guidlines [A]
+
+A. https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
