@@ -70,7 +70,7 @@ aws secretsmanager put-secret-value --secret-id eks-controller-test-secret --sec
 ## Result - 
 The secrets-nginx deployment should restart the pods
 
-Troubleshooting -
+## Troubleshooting -
 1. How to check if the secretoperator is running
 Check if there is deployment called "secretoperator-controller-manager" namespace "secretoperator-system". And make sure the pod in the deployment is ready.
 
@@ -83,3 +83,8 @@ ii. Make sure the OIDC ID in the trust policy is for the EKS cluster on which th
 iii. Make sure the OIDC identity provider is created as per the IRSA guidlines [A]
 
 A. https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
+
+4. What to check if the pods in Deployements/Daemonsets/Statefulset are not getting restarted after secret is updated ?
+i. Check the CRD resource and make sure the secret you are updating the secret ID in the resource is same -
+kubectl get SecretsRotationMapping secretsrotationmapping-sample -o yaml
+ii. Make sure the label in the CRD resource and label in the Deployements/Daemonsets/Statefulset mathc. Labels are case sensitive.
