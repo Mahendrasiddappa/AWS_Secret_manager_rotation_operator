@@ -82,9 +82,9 @@ i. Make sure the OperatorRole created by CloudFormation stack in step 4 has the 
 ii. Make sure the OIDC ID in the trust policy is for the EKS cluster on which the operator is running
 iii. Make sure the OIDC identity provider is created as per the IRSA guidlines [A]
 
-A. https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
-
 4. What to check if the pods in Deployements/Daemonsets/Statefulset are not getting restarted after secret is updated ?
 i. Check the CRD resource and make sure the secret you are updating the secret ID in the resource is same -
 kubectl get SecretsRotationMapping secretsrotationmapping-sample -o yaml
 ii. Make sure the label in the CRD resource and label in the Deployements/Daemonsets/Statefulset mathc. Labels are case sensitive.
+
+A. https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
