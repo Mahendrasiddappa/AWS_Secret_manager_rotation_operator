@@ -57,9 +57,9 @@ make deploy IMG=<registry>:<tag>
   kubectl create -f config/samples/awssecretsoperator_v1_secretsrotationmapping.yaml
   ```
 
-2. Create a deployment which runs nginx pods and has labels "environment: OperatorTest" - 
+2. Create a deployment which runs nginx pods and has labels "environment: operatortest" - 
   ```
-  kubectl run secrets-nginx --image=nginx -l environment=OperatorTest
+  kubectl create -f config/samples/deployment.yaml
   ```
 
 3. Create PutSecretValue event -
