@@ -81,7 +81,7 @@ Resources:
               "Action": "sts:AssumeRoleWithWebIdentity",
               "Condition": {
                 "StringEquals": {
-                  "${OIDCPROVIDER}:sub": "system:serviceaccount:default:operator-serviceaccount"
+                  "${OIDCPROVIDER}:sub": "system:serviceaccount:secretoperator-system:secretoperator-operator-serviceaccount"
                 }
               }
             }
